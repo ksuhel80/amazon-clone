@@ -9,7 +9,7 @@ import { useSession } from 'next-auth/client'
 function Checkout() {
     const items = useSelector(selectItems);
     const total = useSelector(selectTotal);
-    const session = useSession();
+    const [session] = useSession();
 
     return (
         <div className="bg-gray-100">
@@ -41,9 +41,9 @@ function Checkout() {
                                     </span>
                                 </h2>
                                 <button className={`button mt-2 ${
-                                    session && "from-gray-300 to-gray-500 border-gray-200 text-gray-300 cursor-not-allowed"
+                                    !session && "from-gray-300 to-gray-500 border-gray-200 text-gray-300 cursor-not-allowed"
                                 }`}>
-                                        {session ? "SignIn to Checkout" : "Proceed to Checkout"}
+                                        {!session ? "SignIn to Checkout" : "Proceed to Checkout"}
                                 </button>
                                 </>
                             )}
